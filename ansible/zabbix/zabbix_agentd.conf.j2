@@ -1,0 +1,19 @@
+### Global ###
+Server={{ ansible_host }}
+ServerActive={{ ansible_host }}
+Hostname={{ ansible_hostname }}
+
+### Optional: Set agent hostname as FQDN ###
+# HostnameItem=system.hostname
+
+### Optional: Set agent hostname as IP address ###
+# HostnameItem=system.network.ip[{{ ansible_default_ipv4['interface'] }}]
+
+### Optional: Encryption key ###
+# TLSConnect=psk
+# TLSPSKIdentity=UniquePSKIdentity
+# TLSPSKFile=/etc/zabbix/zabbix_agentd.psk
+
+### Optional: Active checks related settings ###
+# StartAgents=3
+# ServerPort=10051

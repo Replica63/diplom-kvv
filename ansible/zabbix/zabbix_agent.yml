@@ -1,0 +1,28 @@
+---
+- name: Install Zabbix Agent
+  hosts: webservers:elasticsearch_host:kibana_host
+  become: true
+  tasks:
+    - name: Install Zabbix Agent on Debian
+      apt:
+        name: zabbix-agent
+        state: present
+
+    - name: Configure Zabbix Agent
+      template:
+        src: zabbix_agentd.conf.j2
+        dest: /etc/zabbix/zabbix_agentd.conf
+      notify:
+        - restart zabbix-agent
+
+    - name: Start Zabbix Agent service
+      service:
+        name: zabbix-agent
+        state: started
+        enabled: true
+
+  handlers:
+    - name: restart zabbix-agent
+      service:
+        name: zabbix-agent
+        state: restarted
